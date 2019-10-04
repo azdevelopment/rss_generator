@@ -1,12 +1,14 @@
 # rss_generator
 Rss generator for rss.az
 
-# usage
-/**
+## usage
+
+``` 
  * key : write category of your website
  * value : catergory of Rss.az
- */
-$generate = new RssGenerator([
+ 
+ 
+  $generate = new RssGenerator([
     'category'=>[
         "Maliyyə"=>"Biznes və maliyyə",
         "Hadisə"=>"Hadisə",
