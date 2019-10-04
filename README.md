@@ -6,7 +6,7 @@ Rss generator for rss.az
  * key : write category of your website
  * value : catergory of Rss.az
  */
-$generator = new RssGenerator([
+$generate = new RssGenerator([
     'category'=>[
         "Maliyyə"=>"Biznes və maliyyə",
         "Hadisə"=>"Hadisə",
