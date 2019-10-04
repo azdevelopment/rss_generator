@@ -26,3 +26,7 @@ Rss generator for rss.az
     ],
     'query'=>Post::get()->toArray()
 ]);
+
+$generate->xmlMake();
+echo $generate->write();
+
