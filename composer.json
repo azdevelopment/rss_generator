@@ -3,6 +3,8 @@
   "description": "Rss.az ",
   "keywords": ["rss maker","array to rss","rss.az"],
   "homepage": "https://rss.az",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=7.0.0"
   },
