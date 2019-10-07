@@ -1,0 +1,19 @@
+{
+  "name": "rss-az/array-to-xml",
+  "description": "Rss.az ",
+  "keywords": ["rss maker","array to rss","rss.az"],
+  "homepage": "https://rss.az",
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Shahriyar Alizada",
+      "email": "development.az@yandex.com"
+    }
+  ],
+  "autoload": {
+    "files": ["lib/required.php"]
+  }
+}

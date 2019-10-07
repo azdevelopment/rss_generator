@@ -1,4 +1,9 @@
 <?php
+/**
+ * Required interface and child file
+ */
+require_once "IRssGenerator.php";
+require_once "ItemGenerator.php";
 
 /**
  * Class RssGenerator
