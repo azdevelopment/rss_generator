@@ -1,2 +1,2 @@
 <?php
-require_once "lib/RssGenerator.php";
+require_once "RssGenerator.php";
