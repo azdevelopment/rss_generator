@@ -1,5 +1,9 @@
 # install
 composer require rss-az/array-to-xml
+
+``"require": {
+         "rss-az/array-to-xml": "dev-master"
+     }``
 # rss_generator
 Rss generator for rss.az
 
