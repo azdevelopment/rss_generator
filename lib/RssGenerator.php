@@ -13,7 +13,7 @@ class RssGenerator implements IRssGenerator
     /**
      * @var mixed
      */
-    private $categories, $query, $rss_customs, $xml;
+    private $categories, $query, $rss_customs, $xml, $feedItems;
 
     /**
      * Parser constructor.
@@ -32,6 +32,15 @@ class RssGenerator implements IRssGenerator
     public function __set($name, $value)
     {
         $this->rss_customs[$name] = $value;
+    }
+
+    /**
+     * @param $name
+     * @param $arguments
+     */
+    public function __call($name, $arguments)
+    {
+        $this->feedItems[$name] = $arguments[0];
     }
 
     /**
@@ -112,12 +121,12 @@ class RssGenerator implements IRssGenerator
         foreach ($this->query as $row) {
             if ($this->getCategory($row['category'])) {
                 $feedItem = new ItemGenerator();
-                $feedItem->title = $row['title'];
-                $feedItem->link = $row['link'];
-                $feedItem->description = $row['description'];
-                $feedItem->pubDate = $row['created_date'];
+                $feedItem->title = $row[$this->feedItems['title']];
+                $feedItem->link = $row[$this->feedItems['link']];
+                $feedItem->description = $row[$this->feedItems['description']];
+                $feedItem->pubDate = $row[$this->feedItems['pubDate']];
                 $feedItem->enclosure = $row['image'];
-                $feedItem->category = $this->getCategory($row['category']);
+                $feedItem->category = $this->getCategory($row[$this->feedItems['category']]);
                 try {
                     $feedItem->xmlMake();
                 } catch (Exception $e) {

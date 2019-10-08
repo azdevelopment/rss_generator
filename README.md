@@ -33,6 +33,23 @@ Rss generator for rss.az
     'query'=>Post::get()->toArray()
 ]);
 
+// Please write information for rss parent tags. It's required 
+$generate->title = 'Your rss title';
+$generate->link = 'Your rss link';
+$generate->description = 'Your rss description';
+$generate->language = 'Your rss language';
+$generate->image_url = 'Your rss full photo url (etc : https://development.az/images/logo.png)';
+$generate->image_link = 'set link for your logo';
+$generate->image_title = 'set title for your logo';
+
+// For feed items from your post columns
+$generate->title('title');
+$generate->link('slug'); // auto insert REMOTE_ADDR  begin of the slug 
+$generate->description('description'); 
+$generate->pubDate('created_date'); 
+$generate->enclosure('image'); auto insert REMOTE_ADDR  begin of the image path 
+$generate->category('name'); 
+
 $generate->xmlMake();
 echo $generate->write();
 
