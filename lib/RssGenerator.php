@@ -78,6 +78,7 @@ class RssGenerator implements IRssGenerator
 
     /**
      * @return string
+     * @throws Exception
      */
 
     public function xmlMake(): string
@@ -129,7 +130,7 @@ class RssGenerator implements IRssGenerator
                 $feedItem->enclosure = $_SERVER['HTTP_HOST'].$row['image'];
                 $feedItem->category = $this->getCategory($row[$this->feedItems['category']]);
                 try {
-                    $feedItem->xmlMake();
+                    $xml .= $feedItem->xmlMake();
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }

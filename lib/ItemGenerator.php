@@ -23,6 +23,7 @@ class ItemGenerator implements IRssGenerator
 
     /**
      * @return string
+     * @throws Exception
      */
     public function xmlMake(): string
     {
