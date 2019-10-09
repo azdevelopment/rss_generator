@@ -119,7 +119,7 @@ class RssGenerator implements IRssGenerator
         }
 
         foreach ($this->query as $row) {
-            if ($this->getCategory($row['category'])) {
+            if ($this->getCategory($row[$this->feedItems['category']])) {
                 $feedItem = new ItemGenerator();
                 $feedItem->title = $row[$this->feedItems['title']];
                 $feedItem->link = $_SERVER['HTTP_HOST'].$row[$this->feedItems['link']];
