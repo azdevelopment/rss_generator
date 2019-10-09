@@ -87,7 +87,7 @@ class RssGenerator implements IRssGenerator
 
         // channel required properties
         $xml .= '<channel>' . "\n";
-        if (array_key_exists("title", $this->rss_customs['title'])) {
+        if (array_key_exists("title", $this->rss_customs)) {
             $xml .= '<title>' . $this->rss_customs["title"] . '</title>' . "\n";
         } else {
             throw new Exception("title doesn't set");
