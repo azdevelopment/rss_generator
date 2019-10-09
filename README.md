@@ -15,7 +15,7 @@ Rss generator for rss.az
  
  
   $generate = new RssGenerator([
-    'category'=>[
+    'categories'=>[
         "Maliyyə"=>"Biznes və maliyyə",
         "Hadisə"=>"Hadisə",
         "Siyasət"=>"Cəmiyyət və siyasət",
