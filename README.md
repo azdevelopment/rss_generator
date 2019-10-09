@@ -44,10 +44,10 @@ $generate->image_title = 'set title for your logo';
 
 // For feed items from your post columns
 $generate->title('title');
-$generate->link('slug'); // auto insert REMOTE_ADDR  begin of the slug 
+$generate->link('slug'); // auto insert HTTP_HOST  begin of the slug 
 $generate->description('description'); 
 $generate->pubDate('created_date'); 
-$generate->enclosure('image'); auto insert REMOTE_ADDR  begin of the image path 
+$generate->enclosure('image'); auto insert HTTP_HOST  begin of the image path 
 $generate->category('name'); 
 
 $generate->xmlMake();

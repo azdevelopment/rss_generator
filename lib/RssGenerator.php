@@ -13,7 +13,7 @@ class RssGenerator implements IRssGenerator
     /**
      * @var mixed
      */
-    private $categories, $query, $rss_customs, $xml, $feedItems;
+    private $categories, $query, $rss_customs, $xml, $feedItems, $ssl=true;
 
     /**
      * Parser constructor.
@@ -122,10 +122,10 @@ class RssGenerator implements IRssGenerator
             if ($this->getCategory($row['category'])) {
                 $feedItem = new ItemGenerator();
                 $feedItem->title = $row[$this->feedItems['title']];
-                $feedItem->link = $row[$this->feedItems['link']];
+                $feedItem->link = $_SERVER['HTTP_HOST'].$row[$this->feedItems['link']];
                 $feedItem->description = $row[$this->feedItems['description']];
                 $feedItem->pubDate = $row[$this->feedItems['pubDate']];
-                $feedItem->enclosure = $row['image'];
+                $feedItem->enclosure = $_SERVER['HTTP_HOST'].$row['image'];
                 $feedItem->category = $this->getCategory($row[$this->feedItems['category']]);
                 try {
                     $feedItem->xmlMake();
