@@ -1,5 +1,6 @@
 <?php
 /**
+ * @author : Shahriyar Alizada
  * Required interface and child file
  */
 require_once "IRssGenerator.php";
