@@ -133,7 +133,7 @@ class RssGenerator implements IRssGenerator
                 $feedItem->link = $_SERVER['HTTP_HOST'] . "/" . $row[$this->feedItems['link']];
                 $feedItem->description = $row[$this->feedItems['description']];
                 $feedItem->pubDate = $row[$this->feedItems['pubDate']];
-                $feedItem->enclosure = $this->enclosure_path ?? null . $row['image'] . $this->enclosure_ext ?? null;
+                $feedItem->enclosure = $this->enclosure_path ?? null . $row[$this->feedItems['image']] . $this->enclosure_ext ?? null;
                 $feedItem->category = $this->getCategory($row[$this->feedItems['category']]);
                 try {
                     $xml .= $feedItem->xmlMake();
