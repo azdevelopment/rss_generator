@@ -14,7 +14,7 @@ class RssGenerator implements IRssGenerator
     /**
      * @var bool
      */
-    public $enclosure_path = false, $enclosure_ext = false;
+    public $enclosure_path = null, $enclosure_ext = null;
 
     /**
      * @var mixed
