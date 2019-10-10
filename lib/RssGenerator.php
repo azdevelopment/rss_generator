@@ -46,11 +46,12 @@ class RssGenerator implements IRssGenerator
 
     /**
      * write content
+     * @throws Exception
      */
     public function write()
     {
         header('Content-type: application/xml');
-        echo $this->xmlMake();
+        return $this->xmlMake();
 
     }
 
@@ -70,8 +71,8 @@ class RssGenerator implements IRssGenerator
 
     private function getCategory($category)
     {
-        if (isset($this->categories[$category])) {
-            return $this->categories[$category];
+        if (isset($this->categories[0][$category])) {
+            return $this->categories[0][$category];
         }
         return false;
     }
@@ -124,10 +125,10 @@ class RssGenerator implements IRssGenerator
             if ($this->getCategory($row[$this->feedItems['category']])) {
                 $feedItem = new ItemGenerator();
                 $feedItem->title = $row[$this->feedItems['title']];
-                $feedItem->link = $_SERVER['HTTP_HOST'].$row[$this->feedItems['link']];
+                $feedItem->link = $_SERVER['HTTP_HOST']."/".$row[$this->feedItems['link']];
                 $feedItem->description = $row[$this->feedItems['description']];
                 $feedItem->pubDate = $row[$this->feedItems['pubDate']];
-                $feedItem->enclosure = $_SERVER['HTTP_HOST'].$row['image'];
+                $feedItem->enclosure = $_SERVER['HTTP_HOST']."/".$row['image'];
                 $feedItem->category = $this->getCategory($row[$this->feedItems['category']]);
                 try {
                     $xml .= $feedItem->xmlMake();
@@ -137,7 +138,7 @@ class RssGenerator implements IRssGenerator
             }
         }
 
-        $xml .= '</channel>';
+        $xml .= '</channel>' . "\n";
 
         $xml .= '</rss>';
 

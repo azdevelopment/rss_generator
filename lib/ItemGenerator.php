@@ -50,7 +50,7 @@ class ItemGenerator implements IRssGenerator
             throw new Exception("pubDate does not set for feed item");
         }
         if (array_key_exists('enclosure', $this->objItem)) {
-            $xml .= '<enclosure url="' . $this->objItem['enclosure'] . '" type="image/jpeg"/>';
+            $xml .= '<enclosure url="' . $this->objItem['enclosure'] . '" type="image/jpeg" />'. "\n";
         } else {
             throw new Exception("enclosure does not set for feed item");
         }
