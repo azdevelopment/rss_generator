@@ -19,14 +19,16 @@ class RssGenerator implements IRssGenerator
     /**
      * @var mixed
      */
-    private $categories, $query, $rss_customs, $xml, $feedItems;
+    private $categories, $query, $rss_customs, $xml, $feedItems, $item;
 
     /**
      * Parser constructor.
      * @param array $array
+     * @param ItemGenerator $item
      */
-    public function __construct(array $array)
+    public function __construct(array $array, ItemGenerator $item)
     {
+        $this->item = $item;
         $this->categories = $array['categories'];
         $this->query = $array['query'];
     }
@@ -89,6 +91,9 @@ class RssGenerator implements IRssGenerator
 
     public function xmlMake(): string
     {
+        $this->item->enclosure_path = $this->enclosure_path;
+        $this->item->enclosure_ext = $this->enclosure_ext;
+
         $xml = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
 
         $xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
@@ -128,15 +133,14 @@ class RssGenerator implements IRssGenerator
 
         foreach ($this->query as $row) {
             if ($this->getCategory($row[$this->feedItems['category']])) {
-                $feedItem = new ItemGenerator();
-                $feedItem->title = $row[$this->feedItems['title']];
-                $feedItem->link = $_SERVER['HTTP_HOST'] . "/" . $row[$this->feedItems['link']];
-                $feedItem->description = $row[$this->feedItems['description']];
-                $feedItem->pubDate = $row[$this->feedItems['pubDate']];
-                $feedItem->enclosure = $this->enclosure_path ?? null . $row[$this->feedItems['image']] . $this->enclosure_ext ?? null;
-                $feedItem->category = $this->getCategory($row[$this->feedItems['category']]);
+                $this->item->title = $row[$this->feedItems['title']];
+                $this->item->link = $_SERVER['HTTP_HOST'] . "/" . $row[$this->feedItems['link']];
+                $this->item->description = $row[$this->feedItems['description']];
+                $this->item->pubDate = $row[$this->feedItems['pubDate']];
+                $this->item->enclosure = $row['image'];
+                $this->item->category = $this->getCategory($row[$this->feedItems['category']]);
                 try {
-                    $xml .= $feedItem->xmlMake();
+                    $xml .= $this->item->xmlMake();
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
