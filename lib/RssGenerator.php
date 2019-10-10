@@ -12,9 +12,14 @@ require_once "ItemGenerator.php";
 class RssGenerator implements IRssGenerator
 {
     /**
+     * @var bool
+     */
+    public $enclosure_path = false, $enclosure_ext = false;
+
+    /**
      * @var mixed
      */
-    private $categories, $query, $rss_customs, $xml, $feedItems, $ssl=true;
+    private $categories, $query, $rss_customs, $xml, $feedItems;
 
     /**
      * Parser constructor.
@@ -125,10 +130,10 @@ class RssGenerator implements IRssGenerator
             if ($this->getCategory($row[$this->feedItems['category']])) {
                 $feedItem = new ItemGenerator();
                 $feedItem->title = $row[$this->feedItems['title']];
-                $feedItem->link = $_SERVER['HTTP_HOST']."/".$row[$this->feedItems['link']];
+                $feedItem->link = $_SERVER['HTTP_HOST'] . "/" . $row[$this->feedItems['link']];
                 $feedItem->description = $row[$this->feedItems['description']];
                 $feedItem->pubDate = $row[$this->feedItems['pubDate']];
-                $feedItem->enclosure = $_SERVER['HTTP_HOST']."/".$row['image'];
+                $feedItem->enclosure = $_SERVER['HTTP_HOST'] . "/" . $this->enclosure_path ?? null . $row['image'] . $this->enclosure_ext ?? null;
                 $feedItem->category = $this->getCategory($row[$this->feedItems['category']]);
                 try {
                     $xml .= $feedItem->xmlMake();
